@@ -27,3 +27,22 @@ class SubCategoryMenu(models.Model):
 
     def __str__(self):
         return self.menuName
+
+class TableType(models.Model):
+    type = models.CharField(max_length=20,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.type
+
+class Table(models.Model):
+     tableTypeId = models.ForeignKey(TableType,on_delete=models.CASCADE)
+     tableName = models.CharField(max_length=20,null=True,blank=True)
+     updated = models.DateTimeField(auto_now=True)
+     created = models.DateTimeField(auto_now_add=True)
+     status = models.BooleanField(default=False)
+
+     def __str__(self):
+         return self.tableName
+
