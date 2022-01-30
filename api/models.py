@@ -46,3 +46,29 @@ class Table(models.Model):
      def __str__(self):
          return self.tableName
 
+
+class TimeForOrder(models.Model):
+    time_id = models.AutoField(primary_key=True)
+    time = models.TimeField()
+    
+    def __str__(self):
+        return f'{self.time}'
+    def __unicode__(self):
+        return "%s " % ( self.time(' %I:%M %p'))
+
+class Orders(models.Model):
+    orderId = models.AutoField(primary_key=True)
+    categoryMenuId= models.ForeignKey(CategoryMenu,on_delete=models.CASCADE)
+    subCategoryMenuId= models.ForeignKey(SubCategoryMenu,on_delete=models.CASCADE)
+    quantity = models.IntegerField(blank=True,null=True)
+    tableId = models.ForeignKey(Table,on_delete=models.CASCADE)
+    date = models.DateField(blank=True,null=True )
+    time = models.ForeignKey(TimeForOrder, on_delete=models.CASCADE,blank=True,null=True)
+
+    class Meta:
+         unique_together = ['date', 'time', 'orderId']
+         
+    def __str__(self):
+           return f'{self.orderId}'
+
+
