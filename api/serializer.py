@@ -29,9 +29,10 @@ class TableTypeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class TableSerializer(serializers.ModelSerializer):
+    tableName = serializers.CharField(max_length=20)
     class Meta:
         model = Table
-        fields = ['tableTypeId','tableName','status']
+        fields = "__all__"
 
 class OrderSerialzer(serializers.ModelSerializer):
     quantity = serializers.IntegerField()

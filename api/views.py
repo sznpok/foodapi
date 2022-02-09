@@ -2,12 +2,13 @@ from django.shortcuts import get_object_or_404, render
 from .models import CategoryMenu, FoodType, Orders,SubCategoryMenu, Table, TableType
 from .serializer import CategoryMenuSerializer, FoodTypeSerializer,SubCategoryMenuSerializer, TableSerializer, TableTypeSerializer,OrderSerialzer
 from rest_framework import viewsets
-
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 
 class FoodTypeViewset(viewsets.ViewSet):
+
+    permission_classes = (IsAuthenticated,)
     queryset = FoodType.objects.all()
 
     def list(self,request):
@@ -45,6 +46,7 @@ class FoodTypeViewset(viewsets.ViewSet):
 
 
 class CategoryMenuviewset(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = CategoryMenu.objects.all()
 
     def list(self, request):
@@ -85,6 +87,7 @@ class CategoryMenuviewset(viewsets.ViewSet):
 
 
 class SubCategoryMenuviewset(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = SubCategoryMenu.objects.all()
 
     def list(self, request):
@@ -124,6 +127,8 @@ class SubCategoryMenuviewset(viewsets.ViewSet):
 
 
 class Tableviewset(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
+    
     queryset = Table.objects.all()
 
     def list(self, request):
@@ -163,6 +168,7 @@ class Tableviewset(viewsets.ViewSet):
 
 
 class TableTypeviewset(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = TableType.objects.all()
 
     def list(self, request):
@@ -201,6 +207,7 @@ class TableTypeviewset(viewsets.ViewSet):
         return Response({"status":"success","data":"Item Deleted"})\
 
 class Orderviewset(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Orders.objects.all()
 
     def list(self, request):
