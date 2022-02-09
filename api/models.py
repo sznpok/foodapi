@@ -44,7 +44,7 @@ class Table(models.Model):
      status = models.BooleanField(default=False)
 
      def __str__(self):
-         return self.tableName
+         return f'{self.tableName}'
 
 
 class TimeForOrder(models.Model):
